@@ -114,7 +114,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: service_name
+            name: whoami5
             port:
               number: 8000 # Porta que sera usada pelo SERVICE - DEVE SER A MESMA do SERVICE
 
