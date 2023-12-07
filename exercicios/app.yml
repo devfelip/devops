@@ -1,5 +1,5 @@
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: logs
@@ -24,7 +24,7 @@ rules:
 
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: logs
@@ -98,23 +98,25 @@ spec:
 
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: whoami5
   # namespace: whoami5
   annotations:
     allow.http: "false"
-
 spec:
   rules:
-  - host: app.rancher.<dominio.com>
+  - host: app.felipetechlab.com
     http:
       paths:
-        - path: /
-          backend:
-            serviceName: whoami5
-            servicePort: 80 # Porta que sera usada pelo SERVICE - DEVE SER A MESMA do SERVICE
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: service_name
+            port:
+              number: 8000 # Porta que sera usada pelo SERVICE - DEVE SER A MESMA do SERVICE
 
 
 
